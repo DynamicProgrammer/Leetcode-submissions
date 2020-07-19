@@ -1,0 +1,30 @@
+class Solution {
+public:
+    
+    vector<int> topKFrequent(vector<int>& nums, int k) {
+        
+        map<int, int> hash;
+        vector<pair<int,int>> p;
+        vector<int> result;
+        
+        for(int i=0; i<nums.size(); i++)
+            hash[nums[i]]++;
+        
+        for(int i=0; i<nums.size(); i++)
+            if(hash[nums[i]]!=-1)
+            {
+                p.push_back(make_pair(hash[nums[i]],nums[i]));
+                hash[nums[i]]=-1;
+            }
+        
+        sort(p.begin(),p.end());
+        int i = p.size()-1;
+        while(k--)
+        {
+            result.push_back(p[i].second);
+            i--;
+        }
+        
+        return result;
+    }
+};
